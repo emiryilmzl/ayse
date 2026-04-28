@@ -129,6 +129,19 @@ body {
     text-align: center;
 }
 
+.student-name {
+    display: inline-block;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    border-radius: 999px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    padding: 12px 24px;
+    box-shadow: 0 8px 18px rgba(253, 160, 133, 0.35);
+}
+
 .menu-container h2 {
     font-size: 36px;
     color: #667eea;
