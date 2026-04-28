@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Sanat Dedektifi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Oyun Ana Konteyneri -->
+    <div class="game-container">
+        
+        <!-- Başlık Bölümü -->
+        <header class="header">
+            <h1 class="title">🎨 SANAT DEDEKTİFİ 🔍</h1>
+            <div class="header-tools">
+                <span class="total-pill">Toplam Puan: <strong id="headerTotalScore">0</strong></span>
+                <button class="sound-btn" id="soundToggleBtn" onclick="app.toggleSound()">🔊 Ses Açık</button>
+            </div>
+        </header>
+
+        <!-- ==== ANA MENÜ EKRANI ==== -->
+        <section id="mainMenu" class="screen active">
+            <div class="menu-container">
+                <!-- Hoş gelişi mesajı -->
+                <h2>Hoş Geldin! 👋</h2>
+                <p>Sanat dünyasını keşfet ve öğren!</p>
+                <div class="menu-score-card">
+                    <span>Toplam Puan</span>
+                    <strong id="menuTotalScore">0</strong>
+                </div>
+                
+                <!-- Menü butonları -->
+                <div class="menu-buttons">
+                    <button class="menu-btn lesson-btn" onclick="app.showScreen('learningScreen')">
+                        <span class="btn-icon">📚</span>
+                        <span>Teknikleri Öğren</span>
+                    </button>
+                    
+                    <button class="menu-btn game-btn" onclick="app.startFindTechniqueGame()">
+                        <span class="btn-icon">🎯</span>
+                        <span>Tekniği Bul</span>
+                    </button>
+                    
+                    <button class="menu-btn game-btn" onclick="app.startMaterialGame()">
+                        <span class="btn-icon">🖌️</span>
+                        <span>Malzemeyi Tanı</span>
+                    </button>
+                    
+                    <button class="menu-btn game-btn" onclick="app.startMatchingGame()">
+                        <span class="btn-icon">⚡</span>
+                        <span>Eşleştir</span>
+                    </button>
+                    
+                    <button class="menu-btn game-btn" onclick="app.startMemoryGame()">
+                        <span class="btn-icon">🧠</span>
+                        <span>Sanat Hafızası</span>
+                    </button>
+                    
+                    <button class="menu-btn game-btn" onclick="app.startShadowGame()">
+                        <span class="btn-icon">🌑</span>
+                        <span>Gölge Nerede?</span>
+                    </button>
+
+                    <button class="menu-btn result-btn" onclick="app.showResultScreen()">
+                        <span class="btn-icon">🏅</span>
+                        <span>Sonuç ve Rozet</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== TEKNİKLERİ ÖĞREN EKRANI ==== -->
+        <section id="learningScreen" class="screen">
+            <!-- Geri Butonu -->
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            
+            <div class="learning-container">
+                <!-- Başlık -->
+                <h2>Resim Teknikleri</h2>
+                <p>Aşağıdaki teknikleri öğren ve sanat dünyasını keşfet!</p>
+                
+                <!-- Teknikler Container'ı -->
+                <div class="techniques-list" id="techniquesList">
+                    <!-- Teknikler JavaScript ile yüklenecek -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tekniği Bul Oyunu -->
+        <section id="findTechniqueScreen" class="screen">
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            <div class="game-panel">
+                <div class="game-top">
+                    <h2>🎯 Tekniği Bul</h2>
+                    <span class="score-pill">Puan: <strong id="findScore">0</strong></span>
+                </div>
+                <p class="question-text" id="findQuestion"></p>
+                <div class="option-grid" id="findOptions"></div>
+                <div class="feedback" id="findFeedback"></div>
+                <button class="next-btn hidden" id="findNextBtn" onclick="app.nextFindTechniqueQuestion()">Sonraki Soru</button>
+            </div>
+        </section>
+
+        <!-- Malzemeyi Tanı Oyunu -->
+        <section id="recognizeMaterialScreen" class="screen">
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            <div class="game-panel">
+                <div class="game-top">
+                    <h2>🖌️ Malzemeyi Tanı</h2>
+                    <span class="score-pill">Puan: <strong id="materialScore">0</strong></span>
+                </div>
+                <div class="big-emoji" id="materialEmoji"></div>
+                <p class="question-text" id="materialQuestion"></p>
+                <div class="option-grid" id="materialOptions"></div>
+                <div class="feedback" id="materialFeedback"></div>
+                <button class="next-btn hidden" id="materialNextBtn" onclick="app.nextMaterialQuestion()">Sonraki Soru</button>
+            </div>
+        </section>
+
+        <!-- Eşleştir Oyunu -->
+        <section id="matchingScreen" class="screen">
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            <div class="game-panel">
+                <div class="game-top">
+                    <h2>⚡ Eşleştir</h2>
+                    <span class="score-pill">Puan: <strong id="matchingScore">0</strong></span>
+                </div>
+                <p class="question-text">Soldan bir malzeme seç, sonra sağdan uygun çalışmayı bul.</p>
+                <div class="matching-board">
+                    <div>
+                        <h3>Malzemeler</h3>
+                        <div class="match-column" id="matchTerms"></div>
+                    </div>
+                    <div>
+                        <h3>Çalışmalar</h3>
+                        <div class="match-column" id="matchDescriptions"></div>
+                    </div>
+                </div>
+                <div class="feedback" id="matchingFeedback"></div>
+            </div>
+        </section>
+
+        <!-- Sanat Hafızası Oyunu -->
+        <section id="memoryScreen" class="screen">
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            <div class="game-panel">
+                <div class="game-top">
+                    <h2>🧠 Sanat Hafızası</h2>
+                    <span class="score-pill">Puan: <strong id="memoryScore">0</strong></span>
+                </div>
+                <p class="question-text">Bir malzemeyi ona uygun sanat çalışmasıyla eşleştir.</p>
+                <div class="memory-board" id="memoryBoard"></div>
+                <div class="feedback" id="memoryFeedback"></div>
+            </div>
+        </section>
+
+        <!-- Gölge Nerede Oyunu -->
+        <section id="shadowScreen" class="screen">
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            <div class="game-panel">
+                <div class="game-top">
+                    <h2>🌑 Gölge Nerede?</h2>
+                    <span class="score-pill">Puan: <strong id="shadowScore">0</strong></span>
+                </div>
+                <p class="question-text" id="shadowQuestion"></p>
+                <div class="shadow-scene" id="shadowScene"></div>
+                <div class="option-grid" id="shadowOptions"></div>
+                <div class="feedback" id="shadowFeedback"></div>
+                <button class="next-btn hidden" id="shadowNextBtn" onclick="app.nextShadowQuestion()">Sonraki Soru</button>
+            </div>
+        </section>
+
+        <!-- Sonuç ve Rozet Ekranı -->
+        <section id="resultScreen" class="screen">
+            <button class="back-btn" onclick="app.showScreen('mainMenu')">← Ana Menüye Dön</button>
+            <div class="result-panel">
+                <h2>🏅 Sonuç ve Rozet</h2>
+                <p class="result-label">Toplam Puan</p>
+                <div class="total-score" id="totalScore">0</div>
+                <div class="badge" id="badgeIcon"></div>
+                <h3 id="badgeTitle"></h3>
+                <p id="badgeMessage"></p>
+                <div class="result-actions">
+                    <button class="next-btn" onclick="app.showScreen('mainMenu')">Ana Menüye Dön</button>
+                    <button class="reset-btn" onclick="app.resetAllScores()">Oyunu Sıfırla</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript dosyasını yükle -->
+    <script src="script.js"></script>
+</body>
+</html>
