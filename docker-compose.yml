@@ -1,0 +1,9 @@
+services:
+  ayse-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ayse-web
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3002}:80"
